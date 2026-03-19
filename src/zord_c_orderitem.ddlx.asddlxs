@@ -1,0 +1,66 @@
+@Metadata.layer: #CORE
+@UI:{ 
+     headerInfo:{ 
+                  typeName: 'Order Detail',
+                   typeNamePlural: 'order Details',
+                   title.value: 'Productname'
+                   } 
+     }
+annotate entity ZORD_C_ORDERITEM
+    with 
+    
+{
+    @UI.facet: [{ id:'idOrderItem',label : 'Order Items' , type :#IDENTIFICATION_REFERENCE , position : 10 }]
+    
+    @EndUserText.label: 'Order item Number'
+    Orderitemid;
+    @EndUserText.label: 'Product Name'
+    @UI.lineItem: [{ position :10 }]
+    @UI.identification: [{ position : 10 }]
+    Productname;
+    @UI.identification: [{ position : 20 }]
+    @EndUserText.label: 'Order header Number'
+    Orderid;
+    @UI.identification: [{ position : 30 }]
+    @UI.lineItem: [{ position :20 }]
+    @EndUserText.label: 'Measuring Unit'
+    Unitfield;
+    @UI.identification: [{ position : 40 }]
+    @UI.lineItem: [{ position :30 }]
+    @EndUserText.label: 'Order Quantity'
+    Quantity;
+    @UI.identification: [{ position : 50 }]
+    @UI.lineItem: [{ position :40 }]
+    @EndUserText.label: 'Currency key'
+    Currkyfield;
+    @UI.identification: [{ position : 60 }]
+    @UI.lineItem: [{ position :50 }]
+    @EndUserText.label: 'Order Amount'
+    Amount;
+    @UI.identification: [{ position : 70 }]
+    @UI.lineItem: [{ position :110 }]
+    @EndUserText.label: 'Order Status'
+    @Consumption.valueHelpDefinition: [{ entity :{ name :'ZORD_C_ORDERSTATUS_VH',element:'value_low'} }]
+    Status; 
+    @UI.identification: [{ position : 80 }]
+    @UI.lineItem: [{ position :60 }]
+    @EndUserText.label: 'Comments'
+    Comments;
+    @UI.identification: [{ position : 90 }]
+    @UI.lineItem: [{ position :70 }]
+    @EndUserText.label: 'Created By'
+    Createdby;
+    @UI.identification: [{ position : 100 }]
+    @UI.lineItem: [{ position :80 }]
+    @EndUserText.label: 'Created At'
+    Createdat;
+    @UI.identification: [{ position : 110 }]
+    @UI.lineItem: [{ position :90 }]
+    @EndUserText.label: 'Last Changed By'
+    Changedby;
+    @UI.identification: [{ position : 120 }]
+    @UI.lineItem: [{ position :100 }]
+    @EndUserText.label: 'Last Changed At'
+    Changedat;
+    
+}

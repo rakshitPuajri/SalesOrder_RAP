@@ -1,0 +1,61 @@
+managed implementation in class zord_cl_orders unique;
+strict ( 2 );
+with draft;
+
+define behavior for ZORD_R_ORDERS alias Order
+persistent table zord_orders
+draft table zord_orders_d
+lock master total etag changedat
+authorization master ( instance )
+etag master changedat
+{
+  create ( authorization : global );
+  update;
+  delete;
+  field ( numbering : managed, readonly ) Orderid;
+  field ( mandatory : create, readonly : update ) Customerid;
+
+  association _items { create; }
+  draft action Activate;
+  draft action Edit;
+  draft action Discard;
+  draft action Resume;
+  draft determine action Prepare;
+
+
+  mapping for zord_orders
+    {
+      Currency   = curr;
+      Amount     = amount;
+      Customerid = customerid;
+      Orderid    = orderid;
+      Changedat  = changedat;
+      Changedby  = changedby;
+      Createdat  = createdat;
+      Orddate    = orddate;
+      Status     = status;
+      Createdby  = createdby;
+      Comments   = comments;
+    }
+}
+
+define behavior for ZORD_R_ORDERITEM alias OrderItems
+persistent table zord_orderitems
+draft table zord_orderitem_d
+lock dependent by _header
+authorization dependent by _header
+etag master changedat
+{
+  update;
+  delete;
+  field ( numbering : managed, readonly ) Orderitemid;
+  field ( readonly ) Orderid;
+
+  validation valItemLimit on save { create; }
+  determination detOrderAmount on save { create; update;}
+
+
+  association _header;
+
+
+}
